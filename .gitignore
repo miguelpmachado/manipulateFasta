@@ -1,3 +1,9 @@
+# Python stuff
+*.py[cod]
+
+# mpmachado_stuff - file with different mpmachado stuffs
+mpmachado_stuff.*
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
