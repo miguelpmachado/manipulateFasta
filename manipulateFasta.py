@@ -38,7 +38,7 @@ def runGetSequences(args):
 
 	outputFile, number_sequences, number_bases = getSequences(fastaFile, listFile, outputFile)
 
-	print str(number_bases) + ' were retreived in ' + str(number_sequences) + ' sequences'
+	print str(number_bases) + ' bases were retreived in ' + str(number_sequences) + ' sequences'
 	print 'And stored in ' + outputFile
 
 	if number_sequences == 0:
