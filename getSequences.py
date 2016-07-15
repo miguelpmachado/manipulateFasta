@@ -13,9 +13,10 @@ def getListSequences(sequencesListFile):
 	with open(sequencesListFile, 'rtU') as lines:
 		for line in lines:
 			line = line.splitlines()[0]
-			if line[0] == '>':
-				line = line[1:]
-			list_sequences.append(line)
+			if len(line) > 0:
+				if line[0] == '>':
+					line = line[1:]
+				list_sequences.append(line)
 	return list_sequences
 
 
@@ -28,19 +29,21 @@ def writeOutFile(fastaFile, list_sequences, outputFile):
 	seqSequence = ''
 	with open(fastaFile, 'rtU') as lines:
 		for line in lines:
-			if line[0] == '>':
-				if seqHeader != '':
-					if seqHeader[1:] in list_sequences:
-						writer.write(seqHeader + '\n')
-						writer.write(seqSequence + '\n')
-						writer.flush()
-						number_bases = number_bases + len(seqSequence)
-						number_sequences += 1
-				seqHeader = ''
-				seqSequence = ''
-				seqHeader = line.splitlines()[0]
-			else:
-				seqSequence = seqSequence + line.splitlines()[0]
+			line = line.splitlines()[0]
+			if len(line) > 0:
+				if line[0] == '>':
+					if seqHeader != '':
+						if seqHeader[1:] in list_sequences:
+							writer.write(seqHeader + '\n')
+							writer.write(seqSequence + '\n')
+							writer.flush()
+							number_bases = number_bases + len(seqSequence)
+							number_sequences += 1
+					seqHeader = ''
+					seqSequence = ''
+					seqHeader = line
+				else:
+					seqSequence = seqSequence + line
 		if seqHeader[1:] in list_sequences:
 			writer.write(seqHeader + '\n')
 			writer.write(seqSequence + '\n')
