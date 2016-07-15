@@ -33,18 +33,38 @@ def writeOutFile(fastaFile, list_sequences, outputFile):
 			if len(line) > 0:
 				if line[0] == '>':
 					if seqHeader != '':
+						sequenced_found = False
+
 						if seqHeader[1:] in list_sequences:
+							# First search
+							sequenced_found = True
+						elif seqHeader[1:].split()[0] in list_sequences:
+							# Second search
+							sequenced_found = True
+
+						if sequenced_found:
 							writer.write(seqHeader + '\n')
 							writer.write(seqSequence + '\n')
 							writer.flush()
 							number_bases = number_bases + len(seqSequence)
 							number_sequences += 1
+
 					seqHeader = ''
 					seqSequence = ''
 					seqHeader = line
 				else:
 					seqSequence = seqSequence + line
+
+		sequenced_found = False
+
 		if seqHeader[1:] in list_sequences:
+			# First search
+			sequenced_found = True
+		elif seqHeader[1:].split()[0] in list_sequences:
+			# Second search
+			sequenced_found = True
+
+		if sequenced_found:
 			writer.write(seqHeader + '\n')
 			writer.write(seqSequence + '\n')
 			writer.flush()
