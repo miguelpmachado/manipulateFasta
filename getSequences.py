@@ -13,7 +13,8 @@ def getListSequences(sequencesListFile):
 	with open(sequencesListFile, 'rtU') as lines:
 		for line in lines:
 			line = line.splitlines()[0]
-			line[0].replace('>', '')
+			if line[0] == '>':
+				line = line[1:]
 			list_sequences.append(line)
 	return list_sequences
 
