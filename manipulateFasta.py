@@ -31,7 +31,13 @@ import getSequences
 
 def runGetSequences(args):
 	print '\n' + 'Getting sequences...'
-	outputFile, number_sequences, number_bases = getSequences(args.gsFasta[0].name, args.gsList[0].name, args.gsOutFile[0])
+
+	fastaFile = args.gsFasta[0].name
+	listFile = args.gsList[0].name
+	outputFile = args.gsOutFile[0]
+
+	outputFile, number_sequences, number_bases = getSequences(fastaFile, listFile, outputFile)
+
 	print str(number_bases) + ' were retreived in ' + str(number_sequences) + ' sequences'
 	print 'And stored in ' + outputFile
 
