@@ -55,7 +55,9 @@ def main():
 
 	parser_getSequences.set_defaults(func=runGetSequences)
 
-	parser.parse_args()
+	args = parser.parse_args()
+
+	args.func(args)
 
 
 if __name__ == "__main__":
